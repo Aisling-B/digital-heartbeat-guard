@@ -90,6 +90,7 @@ export const days: DayData[] = [
       "Alex sends a dark photo. Probably taken under the covers at 6am. You can barely make out a pillow.",
     ],
     alexMessage: "📸 [Dark photo - pillow?]",
+    alexImage: "/snapchat-streak-images-02.png",
     choices: [
       {
         id: "d1-maintenance",
@@ -97,6 +98,7 @@ export const days: DayData[] = [
         type: "maintenance",
         obligationDelta: 10,
         description: "Content? Barely. But the algorithm is satisfied.",
+        choiceImage: "/toast.png",
       },
       {
         id: "d1-genuine",
