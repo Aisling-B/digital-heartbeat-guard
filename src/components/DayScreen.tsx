@@ -12,6 +12,7 @@ interface DayScreenProps {
 
 export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayScreenProps) {
   const [chosen, setChosen] = useState<string | null>(null);
+  const [selectedChoiceImage, setSelectedChoiceImage] = useState<string | null>(null); // Track the image of your choice
   const [narrativeIndex, setNarrativeIndex] = useState(0);
   const allNarrativeShown = narrativeIndex >= dayData.narrative.length;
 
@@ -24,6 +25,10 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
   const handleChoice = (choice: Choice) => {
     if (chosen) return;
     setChosen(choice.id);
+    // If your choice data has an image (like a photo of shoes), we set it here
+    if ((choice as any).choiceImage) {
+      setSelectedChoiceImage((choice as any).choiceImage);
+    }
     onChoice(choice);
   };
 
@@ -109,7 +114,7 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
             </motion.p>
           )}
 
-          {/* Alex's Content Section - Portait Image, No 'S' */}
+          {/* Alex's Content Section */}
           {allNarrativeShown && (dayData.alexMessage || (dayData as any).alexImage) && (
             <motion.div
               className="flex flex-col items-start mt-4 space-y-2 pb-4"
@@ -120,14 +125,12 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
               <p className="text-xs text-muted-foreground font-mono ml-1">Alex</p>
               
               {(dayData as any).alexImage ? (
-                // CHANGED: Aspect Ratio restored to tall portrait, 'S' scribble removed
                 <div className="relative rounded-2xl overflow-hidden border border-border w-[180px] aspect-[2/3] bg-black">
                   <img 
                     src={(dayData as any).alexImage} 
                     alt="Incoming snap" 
                     className="w-full h-full object-cover opacity-80"
                   />
-                  {/* Scribbled "S" overlay removed here as requested */}
                 </div>
               ) : (
                 <div className="bg-chat-bubble px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[80%]">
@@ -138,7 +141,7 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
           )}
         </div>
 
-        {/* Choices */}
+        {/* Choices & Responses Area */}
         {allNarrativeShown && (
           <motion.div
             className="px-6 pb-6 space-y-3 mt-auto"
@@ -167,11 +170,27 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
                 animate={{ opacity: 1 }}
                 className="space-y-4"
               >
-                <div className="px-4 py-3 bg-chat-self rounded-2xl rounded-br-sm ml-auto max-w-[80%]">
-                  <p className="text-sm text-white">
-                    {dayData.choices.find((c) => c.id === chosen)?.text}
-                  </p>
+                {/* YOUR RESPONSE SECTION - Shows text and optionally the photo of your shoes */}
+                <div className="flex flex-col items-end space-y-2">
+                  <p className="text-xs text-muted-foreground font-mono mr-1">You</p>
+                  
+                  {selectedChoiceImage ? (
+                    <div className="relative rounded-2xl overflow-hidden border border-primary/30 w-[180px] aspect-[2/3] bg-black">
+                      <img 
+                        src={selectedChoiceImage} 
+                        alt="Your response snap" 
+                        className="w-full h-full object-cover opacity-90"
+                      />
+                    </div>
+                  ) : (
+                    <div className="px-4 py-3 bg-chat-self rounded-2xl rounded-br-sm max-w-[80%]">
+                      <p className="text-sm text-white">
+                        {dayData.choices.find((c) => c.id === chosen)?.text}
+                      </p>
+                    </div>
+                  )}
                 </div>
+
                 <button
                   onClick={onNext}
                   className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity"
