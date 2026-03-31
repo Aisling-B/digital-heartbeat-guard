@@ -57,7 +57,7 @@ export const days: DayData[] = [
       "What do you do?",
     ],
     alexMessage: "📸 [Blurry ceiling photo]",
-    alexImage: "/snapchat-streak-image-01.png",
+    alexImage: "/snapchat-streak-images-01.png",
     systemAlert: "⏳ 4 hours remaining to maintain your 120-day streak",
     hourglass: true,
     hourglassTime: "4h left",
@@ -68,7 +68,7 @@ export const days: DayData[] = [
         type: "maintenance",
         obligationDelta: 8,
         description: "Quick. Painless. The number survives.",
-        choiceImage: "/shoes.jpg",
+        choiceImage: "/snapchat-streak-images-shoes.png",
       },
       {
         id: "d0-genuine",
