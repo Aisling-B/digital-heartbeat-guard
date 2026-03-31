@@ -13,6 +13,7 @@ export interface DayData {
   title: string;
   narrative: string[];
   alexMessage?: string;
+  alexImage?: string;
   systemAlert?: string;
   choices: Choice[];
   hourglass?: boolean;
@@ -55,6 +56,7 @@ export const days: DayData[] = [
       "What do you do?",
     ],
     alexMessage: "📸 [Blurry ceiling photo]",
+    alexImage: "/ceiling.jpg",
     systemAlert: "⏳ 4 hours remaining to maintain your 120-day streak",
     hourglass: true,
     hourglassTime: "4h left",
