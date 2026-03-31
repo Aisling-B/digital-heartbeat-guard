@@ -109,7 +109,7 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
             </motion.p>
           )}
 
-          {/* Alex's Content Section - Now supports Images */}
+          {/* Alex's Content Section */}
           {allNarrativeShown && (dayData.alexMessage || (dayData as any).alexImage) && (
             <motion.div
               className="flex flex-col items-start mt-4 space-y-2"
@@ -119,17 +119,19 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
             >
               <p className="text-xs text-muted-foreground font-mono ml-1">Alex</p>
               
-              {/* Display Image if it exists in data, otherwise fallback to message bubble */}
               {(dayData as any).alexImage ? (
-                <div className="relative rounded-2xl overflow-hidden border border-border w-48 aspect-[3/4] bg-black">
+                <div className="relative rounded-2xl overflow-hidden border border-border w-full aspect-[4/3] bg-black">
                   <img 
                     src={(dayData as any).alexImage} 
                     alt="Incoming snap" 
                     className="w-full h-full object-cover opacity-80"
+                    onError={(e) => {
+                      // Debugging fallback if image fails
+                      console.error("Image failed to load:", (dayData as any).alexImage);
+                    }}
                   />
-                  {/* Scribbled "S" overlay characteristic of maintenance snaps */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span className="text-white/20 text-7xl font-bold -rotate-12 select-none">S</span>
+                    <span className="text-white/20 text-8xl font-bold -rotate-12 select-none font-serif">S</span>
                   </div>
                 </div>
               ) : (
