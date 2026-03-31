@@ -57,7 +57,7 @@ export const days: DayData[] = [
       "What do you do?",
     ],
     alexMessage: "📸 [Blurry ceiling photo]",
-    alexImage: "/ceiling.jpg",
+    alexImage: "/snapchat-streak-image-01.png",
     systemAlert: "⏳ 4 hours remaining to maintain your 120-day streak",
     hourglass: true,
     hourglassTime: "4h left",
