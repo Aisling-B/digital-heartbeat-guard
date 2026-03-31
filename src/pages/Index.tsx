@@ -1,16 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import IntroScreen from "@/components/IntroScreen";
+import DayScreen from "@/components/DayScreen";
+import AuditScreen from "@/components/AuditScreen";
+import { useGameState } from "@/game/useGameState";
+import { days } from "@/game/gameData";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const { state, phase, startGame, makeChoice, nextDay, goToAudit, restart } = useGameState();
+
+  if (phase === "intro") return <IntroScreen onStart={startGame} />;
+
+  if (phase === "audit") return <AuditScreen gameState={state} onRestart={restart} />;
+
+  const currentDayData = days[state.currentDay];
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <DayScreen
+      key={state.currentDay}
+      dayData={currentDayData}
+      gameState={state}
+      onChoice={(choice) => makeChoice(state.currentDay, choice)}
+      onNext={state.currentDay >= 6 ? goToAudit : nextDay}
+    />
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
