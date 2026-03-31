@@ -30,9 +30,9 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
   const streakDisplay = dayData.day === 6 ? "💀" : `🔥 ${dayData.streakCount}`;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-background">
       <motion.div
-        className="w-full max-w-md bg-phone rounded-3xl border border-border overflow-hidden shadow-2xl"
+        className="w-full max-w-md bg-phone rounded-3xl border border-border overflow-hidden shadow-2xl flex flex-col"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -82,7 +82,7 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
 
         {/* Narrative area */}
         <div
-          className="px-6 py-4 min-h-[200px] cursor-pointer select-none"
+          className="px-6 py-4 flex-grow cursor-pointer select-none"
           onClick={handleNarrativeTap}
         >
           <AnimatePresence mode="wait">
@@ -109,10 +109,10 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
             </motion.p>
           )}
 
-          {/* Alex's Content Section */}
+          {/* Alex's Content Section - Portait Image, No 'S' */}
           {allNarrativeShown && (dayData.alexMessage || (dayData as any).alexImage) && (
             <motion.div
-              className="flex flex-col items-start mt-4 space-y-2"
+              className="flex flex-col items-start mt-4 space-y-2 pb-4"
               initial={{ opacity: 0, x: -15 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
@@ -120,19 +120,14 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
               <p className="text-xs text-muted-foreground font-mono ml-1">Alex</p>
               
               {(dayData as any).alexImage ? (
-                <div className="relative rounded-2xl overflow-hidden border border-border w-full aspect-[4/3] bg-black">
+                // CHANGED: Aspect Ratio restored to tall portrait, 'S' scribble removed
+                <div className="relative rounded-2xl overflow-hidden border border-border w-[180px] aspect-[2/3] bg-black">
                   <img 
                     src={(dayData as any).alexImage} 
                     alt="Incoming snap" 
                     className="w-full h-full object-cover opacity-80"
-                    onError={(e) => {
-                      // Debugging fallback if image fails
-                      console.error("Image failed to load:", (dayData as any).alexImage);
-                    }}
                   />
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span className="text-white/20 text-8xl font-bold -rotate-12 select-none font-serif">S</span>
-                  </div>
+                  {/* Scribbled "S" overlay removed here as requested */}
                 </div>
               ) : (
                 <div className="bg-chat-bubble px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[80%]">
@@ -146,7 +141,7 @@ export default function DayScreen({ dayData, gameState, onChoice, onNext }: DayS
         {/* Choices */}
         {allNarrativeShown && (
           <motion.div
-            className="px-6 pb-6 space-y-3"
+            className="px-6 pb-6 space-y-3 mt-auto"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
