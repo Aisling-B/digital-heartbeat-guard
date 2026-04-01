@@ -77,6 +77,7 @@ export const days: DayData[] = [
         obligationDelta: -5,
         genuineCount: true,
         description: "A real conversation. But it takes effort.",
+        choiceImage: "/snapchat-experience-ai_you-good.png",
       },
     ],
   },
@@ -130,6 +131,7 @@ export const days: DayData[] = [
         type: "maintenance",
         obligationDelta: 15,
         description: "Zero effort. Maximum obligation.",
+        choiceImage: "/snapchat-experience-ai_black-screen.png",
       },
       {
         id: "d2-genuine",
@@ -138,6 +140,7 @@ export const days: DayData[] = [
         obligationDelta: -10,
         genuineCount: true,
         description: "The question neither of you wants to ask.",
+        choiceImage: "/snapchat-experience-ai_just-a-number.png",
       },
     ],
   },
@@ -152,6 +155,7 @@ export const days: DayData[] = [
       "Your obligation meter is climbing. You can feel it.",
     ],
     alexMessage: "lol",
+    alexImage: "/snapchat-experience-ai_lol.png",
     choices: [
       {
         id: "d3-maintenance",
