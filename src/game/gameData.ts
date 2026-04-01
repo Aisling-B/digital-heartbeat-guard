@@ -108,7 +108,6 @@ export const days: DayData[] = [
         obligationDelta: -3,
         genuineCount: true,
         description: "Something personal. Something real.",
-        choiceImage: "/voice-message.png",
       },
     ],
   },
